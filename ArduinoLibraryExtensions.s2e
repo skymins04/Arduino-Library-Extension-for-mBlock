@@ -1,7 +1,7 @@
 ﻿{
 	"extensionName": "Arduino Library Extensions",
 	"description": "Arduino library Extension for mBlock",
-	"version": "1.3",
+	"version": "1.3.1",
 	"author": "BetaMan-KangMinsoo(skymin0417@gmail.com)",
 	"homepage": "github.com/skymins04",
 	"sort":0,
@@ -76,7 +76,7 @@
 			{
 				"setup": "",
 				"inc": "#include \"Encoder.h\"\n",
-				"def": "Encoder enc_{0}({1},{2});\n",
+				"def": "Encoder enc_{0}({2},{1});\n",
 				"work": "",
 				"loop": ""
 			}
@@ -296,7 +296,7 @@
 			"7",
 			"6",
 			{
-				"setup": "",
+				"setup": "fnd_{0}.setBrightness(3);\n",
 				"inc": "#include \"TM1637Display.h\"\n",
 				"def":"TM1637Display fnd_{0}({1},{2});\n",
 				"work":"",
