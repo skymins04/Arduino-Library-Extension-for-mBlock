@@ -1,7 +1,7 @@
 ﻿{
 	"extensionName": "Arduino Library Extensions",
 	"description": "Arduino library Extension for mBlock",
-	"version": "1.3.1",
+	"version": "1.3.2",
 	"author": "BetaMan-KangMinsoo(skymin0417@gmail.com)",
 	"homepage": "github.com/skymins04",
 	"sort":0,
@@ -12,7 +12,7 @@
 		[ //lcd I2C interface library
 			"w",
 			"LCD: LCD %n 번 생성, 주소: %d.addr",
-			"LCD begin",
+			"LCDBegin",
 			"1",
 			"0x27",
 			{
@@ -26,7 +26,7 @@
 		[
 			"w",
 			"LCD: LCD %n 번 %s 출력, %d.line 번째 줄, %d.col 번째 칸",
-			"LCD Print",
+			"LCDPrint",
 			"1",
 			"Hello World!",
 			"0",
@@ -42,7 +42,7 @@
 		[
 			"w",
 			"LCD: LCD %n 번 지우기",
-			"LCD Clear",
+			"LCDClear",
 			"1",
 			{
 				"setup":"",
@@ -55,7 +55,7 @@
 		[
 			"w",
 			"LCD: LCD %n 번 백라이트 %d.power",
-			"LCD Backlight ON",
+			"LCDBacklight",
 			"1",
 			"켜기",
 			{
@@ -69,7 +69,7 @@
 		[ //Rotary encoder library
 			"w",
 			"로터리 엔코더: 로터리 엔코더 %n 번 생성, 디지털 DT %d.digital CLK %d.digital",
-			"Encoder begin",
+			"EncoderBegin",
 			"1",
 			"2",
 			"3",
@@ -84,7 +84,7 @@
 		[
 			"r",
 			"로터리 엔코더: 로터리 엔코더 %n 번 읽기",
-			"Encoder read",
+			"EncoderRead",
 			"1",
 			{
 				"setup": "",
@@ -97,7 +97,7 @@
 		[ //DS1302 rtc library
 			"w",
 			"DS1302 RTC: DS1302 RTC 생성, 디지털 RST %d.digital, DAT %d.digital, CLK %d.digital",
-			"DS1302 begin",
+			"DS1302Begin",
 			"2",
 			"3",
 			"4",
@@ -112,7 +112,7 @@
 		[
 			"w",
 			"DS1302 RTC: 날짜 설정, %n 년 %n 월 %n 일 %d.DOW 요일",
-			"set date",
+			"setDate",
 			"2018",
 			"1",
 			"1",
@@ -128,7 +128,7 @@
 		[
 			"w",
 			"DS1302 RTC: 시간 설정, %n 시 %n 분 %n 초",
-			"set time",
+			"setTime",
 			"12",
 			"0",
 			"0",
@@ -143,7 +143,7 @@
 		[
 			"r",
 			"DS1302 RTC: 시간 받아오기",
-			"get time",
+			"getTime",
 			{
 				"setup": "",
 				"inc": "",
@@ -155,7 +155,7 @@
 		[
 			"r",
 			"DS1302 RTC: 날짜 받아오기",
-			"get Date",
+			"getDate",
 			{
 				"setup": "",
 				"inc": "",
@@ -167,7 +167,7 @@
 		[
 			"r",
 			"DS1302 RTC: 요일 받아오기",
-			"get Day of the week",
+			"getDOW",
 			{
 				"setup": "",
 				"inc": "",
@@ -179,7 +179,7 @@
 		[ //DHT sensor library
 			"w",
 			"DHT 온습도센서: 온습도 센서 %n 번 생성, 디지털 %d.digital 번 핀, %d.DHT 타입",
-			"DHT sensor begin",
+			"DHTBegin",
 			"1",
 			"2",
 			"DHT11",
@@ -194,7 +194,7 @@
 		[
 			"r",
 			"DHT 온습도센서: 온습도 센서 %n 번, 온도 받아오기",
-			"DHT sensor get Temperature",
+			"DHTGetTemperature",
 			"1",
 			{
 				"setup": "",
@@ -207,7 +207,7 @@
 		[
 			"r",
 			"DHT 온습도센서: 온습도 센서 %n 번, 습도 받아오기",
-			"DHT sensor get Humidity",
+			"DHTGetHumidity",
 			"1",
 			{
 				"setup": "",
@@ -220,7 +220,7 @@
 		[ //LM35 temperature sensor
 			"r",
 			"LM35 온도센서: LM35 온도 받아오기, 아날로그 %d.analog 번 핀",
-			"LM35 get temperature",
+			"LM35GetTemperature",
 			"0",
 			{
 				"setup": "",
@@ -233,7 +233,7 @@
 		[ //Stepper library
 			"w",
 			"스텝모터: 스텝모터 %n 번 생성, 디지털 IN1 %d.digital IN2 %d.digital IN3 %d.digital IN4 %d.digital",
-			"stepper Multi begin",
+			"stepperBegin",
 			"1",
 			"2",
 			"3",
@@ -250,7 +250,7 @@
 		[
 			"w",
 			"스텝모터: 스텝모터 %n 번, 속도 %n 설정",
-			"set stepper speed and angle",
+			"setStepperSpeed",
 			"1",
 			"10",
 			{
@@ -264,7 +264,7 @@
 		[
 			"w",
 			"스텝모터: 스텝모터 %n 번, 각도 %n 설정",
-			"set Angle",
+			"setStepperAngle",
 			"1",
 			"0",
 			{
@@ -291,7 +291,7 @@
 		[ //TM1637 FND module library
 			"w",
 			"FND: FND %n 번 생성, 디지털 CLK %d.digital DIO %d.digital",
-			"TM1637 FND module begin",
+			"FNDBegin",
 			"1",
 			"7",
 			"6",
@@ -306,7 +306,7 @@
 		[
 			"w",
 			"FND: FND %n 번 %d.brightness 단계 밝기 설정",
-			"set brightness",
+			"setBrightness",
 			"1",
 			"3",
 			{
@@ -320,7 +320,7 @@
 		[
 			"w",
 			"FND: FND %n 번 전원 %d.power",
-			"set power",
+			"setPower",
 			"1",
 			"켜기",
 			{
@@ -334,7 +334,7 @@
 		[
 			"w",
 			"FND: FND %n 번 %n 출력, 옵션: 빈공간 0 채우기 %d.power, 기다리기 %n 밀리초",
-			"print number",
+			"printNumber",
 			"1",
 			"2018",
 			"끄기",
@@ -350,7 +350,7 @@
 		[ //Bluetooth SoftwareSerial library
 			"w",
 			"HC-06 BT: BT %n 번 생성, 디지털 TX %d.digital RX %d.digital",
-			"BT software Serial begin",
+			"BTBegin",
 			"1",
 			"2",
 			"3",
@@ -365,7 +365,7 @@
 		[
 			"b",
 			"HC-06 BT: BT %n 번 데이터가 왔는가?",
-			"BT available()",
+			"BTAvailable()",
 			"1",
 			{
 				"setup": "",
@@ -378,7 +378,7 @@
 		[
 			"r",
 			"HC-06 BT: BT %n 번 데이터를 문자열로 받아오기",
-			"BT data read",
+			"BTDataRead",
 			"1",
 			{
 				"setup": "",
@@ -391,7 +391,7 @@
 		[
 			"w",
 			"HC-06 BT: BT %n 번 %n 데이터 보네기",
-			"BT write Data",
+			"BTWriteData",
 			"1",
 			" ",
 			{
@@ -405,7 +405,7 @@
 		[ //GY-521 MCU6050 library
 			"w",
 			"GY-521 자이로: GY-521 생성",
-			"GY-521 begin",
+			"GY521Begin",
 			{
 				"setup": "Wire.begin();\nWire.beginTransmission(0x68);\nWire.write(0x6B);\nWire.write(0);\nWire.endTransmission(true);\n",
 				"inc": "",
@@ -417,7 +417,7 @@
 		[
 			"r",
 			"GY-521 자이로: %d.readtype 받아오기",
-			"GY-521 read",
+			"GY521Read",
 			"가속도 X",
 			{
 				"setup": "",
@@ -427,10 +427,87 @@
 				"loop": ""
 			}
 		],
+		[ //Adafruit NeoPixel library
+			"w",
+			"NeoPixel: NeoPixel %n 번 생성, 디지털 %d.digital 번, LED %n 개, %d.neopixel 타입",
+			"neopixelDefine",
+			"1",
+			"2",
+			" ",
+			"RGB",
+			{
+				"setup": "Neo_{0}.setBrightness(255);\nNeo_{0}.begin();\nNeo_{0}.show();\n",
+				"inc": "#include \"Adafruit_NeoPixel.h\"\n",
+				"def": "#if {3}\nAdafruit_NeoPixel Neo_{0} = Adafruit_NeoPixel({2},{1}, NEO_GRB + NEO_KHZ800);\n#else\nAdafruit_NeoPixel Neo_{0} = Adafruit_NeoPixel({2}, {1}, NEO_GRBW + NEO_KHZ800);\n#endif",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"NeoPixel-RGB: NeoPixel %n 번 %n 번째 LED를 R: %n, G: %n, B: %n 으로 정하기",
+			"neoPixelRGBsetPixelColor",
+			"1",
+			"0",
+			"0",
+			"0",
+			"0",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "Neo_{0}.setPixelColor({1},{2},{3},{4});\n",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"NeoPixel-RGBW: NeoPixel %n 번 %n 번째 LED를 R: %n, G: %n, B: %n W: %n 으로 정하기",
+			"neoPixelRGBWsetPixelColor",
+			"1",
+			"0",
+			"0",
+			"0",
+			"0",
+			"0",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "Neo_{0}.setPixelColor({1},{2},{3},{4},{5});\n",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"NeoPixel: NeoPixel %n 번 LED 켜기",
+			"neoPixelShow",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "Neo_{0}.show();\n",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"NeoPixel: NeoPixel %n 번 LED 끄기",
+			"neoPixelClear",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "Neo_{0}.clear();\n",
+				"loop": ""
+			}
+		],
 		[
 			"r",
 			"맵핑: 대상 %n, 대상의 값 범위 %n ~ %n 맵핑결과값의 범위 %n ~ %n",
-			"arudino map function",
+			"arudinoMapFunction",
 			" ",
 			"0",
 			"1023",
@@ -447,7 +524,7 @@
 		[ //etc functions
 			"w",
 			"문자열: 문자열 %s 을(를) 문자열 저장소 %n 번에 저장",
-			"Save String",
+			"SaveString",
 			" ",
 			"1",
 			{
@@ -461,7 +538,7 @@
 		[
 			"r",
 			"문자열: 문자열 저장소 %n 번 불러오기",
-			"load String",
+			"loadString",
 			"1",
 			{
 				"setup": "",
@@ -474,7 +551,7 @@
 		[
 			"r",
 			"타입변환: 문자열 %s 를 숫자로 변환",
-			"convert String to int",
+			"convertStringToInt",
 			" ",
 			{
 				"setup": "",
@@ -487,7 +564,7 @@
 		[
 			"r",
 			"타입변환: 숫자 %n 를 문자열로 변환",
-			"convert Int to String",
+			"convertIntToString",
 			" ",
 			{
 				"setup": "",
@@ -503,13 +580,14 @@
 		"line":[0,1],
 		"col":[0,1,2,4,6,7,8,9,10,11,12,13,14,15],
 		"digital":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],
-		"analog":[0,1,2,3,4,5,6,7],
+		"analog":[0,1,2,3,4,5],
 		"DOW":["월","화","수","목","금","토","일"],
 		"DHT":["DHT11","DHT21","DHT22"],
 		"power":["끄기","켜기"],
 		"brightness":[1,2,3,4,5],
 		"HC":["HC-06","HC-05"],
-		"readtype":["가속도 X","가속도 Y","가속도 Z","자이로 X","자이로 Y","자이로 Z"]
+		"readtype":["가속도 X","가속도 Y","가속도 Z","자이로 X","자이로 Y","자이로 Z"],
+		"neopixel":["RGB","RGBW"]
 	},
 	"values": {
 		"0x20": 0x20,
@@ -534,7 +612,9 @@
 		"가속도 Z": 2,
 		"자이로 X": 3,
 		"자이로 Y": 4,
-		"자이로 Z": 5
+		"자이로 Z": 5,
+		"RGB": 1,
+		"RGBW": 0
 	},
 	"translators":{
 		"zh_CN":{
