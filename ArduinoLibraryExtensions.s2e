@@ -1,7 +1,7 @@
 ﻿{
 	"extensionName": "Arduino Library Extensions",
 	"description": "Arduino library Extension for mBlock",
-	"version": "1.2.8",
+	"version": "1.3",
 	"author": "BetaMan-KangMinsoo(skymin0417@gmail.com)",
 	"homepage": "github.com/skymins04",
 	"sort":0,
@@ -9,51 +9,494 @@
 	"firmware":"1.0",
 	"extensionPort":0,
 	"blockSpecs": [
-		//LCD I2C interface library
-			["w","LCD: LCD %n 번 생성, 주소: %d.addr","LCD begin","1","0x27",{"setup":"lcd_{0}.init();\nlcd_{0}.backlight();\n","inc":"#include \"LiquidCrystal_I2C.h\"\n","def":"LiquidCrystal_I2C lcd_{0}({1},16,2);\n","work":"","loop":""}],
-			["w","LCD: LCD %n 번 %s 출력, %d.line 번째 줄, %d.col 번째 칸","LCD Print","1","Hello World!","0","0",{"setup":"","inc":"","def":"","work":"lcd_{0}.setCursor({3},{2});\nlcd_{0}.print({1});\n","loop":""}],
-			["w","LCD: LCD %n 번 지우기","LCD Clear","1",{"setup":"","inc":"","def":"","work":"lcd_{0}.clear();\n","loop":""}],
-			["w","LCD: LCD %n 번 백라이트 %d.power","LCD Backlight ON","1","켜기",{"setup":"","inc":"","def":"","work":"if({1} == 1) lcd_{0}.backlight();\nelse lcd_{0}.noBacklight();","loop":""}],
-		//Rotary Encoder library
-			["w","로터리 엔코더: 로터리 엔코더 %n 번 생성, 디지털 DT %d.digital CLK %d.digital","Encoder begin","1","2","3",{"setup": "","inc": "#include \"Encoder.h\"\n","def": "Encoder enc_{0}({1},{2});\n","work": "","loop": ""}],
-			["r","로터리 엔코더: 로터리 엔코더 %n 번 읽기","Encoder read","1",{"setup": "","inc": "","def": "","work": "enc_{0}.read()","loop": ""}],
-		//DS1302 library
-			["w","DS1302 RTC: DS1302 RTC 생성, 디지털 RST %d.digital, DAT %d.digital, CLK %d.digital","DS1302 begin","2","3","4",{"setup": "ds1302.halt(false);\nds1302.writeProtect(false);\n","inc": "#include \"DS1302.h\"\n","def": "DS1302 ds1302({0},{1},{2});\n","work": "","loop": ""}],
-			["w","DS1302 RTC: 날짜 설정, %n 년 %n 월 %n 일 %d.DOW 요일","set date","2018","1","1","월",{"setup": "ds1302.setDate({2},{1},{0});\nds1302.setDOW({3});\n","inc": "","def": "","work": "","loop": ""}],
-			["w","DS1302 RTC: 시간 설정, %n 시 %n 분 %n 초","set time","12","0","0",{"setup": "ds1302.setTime({0},{1},{2});\n","inc": "","def": "","work": "","loop": ""}],
-			["r","DS1302 RTC: 시간 받아오기","get time",{"setup": "","inc": "","def": "","work": "ds1302.getTimeStr()","loop": ""}],
-			["r","DS1302 RTC: 날짜 받아오기","get Date",{"setup": "","inc": "","def": "","work": "ds1302.getDateStr()","loop": ""}],
-			["r","DS1302 RTC: 요일 받아오기","get Day of the week",{"setup": "","inc": "","def": "","work": "ds1302.getDOWStr()","loop": ""}],
-		//DHT 온습도 센서 Library
-			["w","DHT 온습도센서: 온습도 센서 %n 번 생성, 디지털 %d.digital 번 핀, %d.DHT 타입","DHT sensor begin","1","2","DHT11",{"setup": "","inc": "#include \"DHT.h\"\n","def": "DHT dht_{0}({1},{2});\n","work": "","loop": ""}],
-			["r","DHT 온습도센서: 온습도 센서 %n 번, 온도 받아오기","DHT sensor get Temperature","1",{"setup": "","inc": "","def": "","work": "dht_{0}.readTemperature()","loop": ""}],
-			["r","DHT 온습도센서: 온습도 센서 %n 번, 습도 받아오기","DHT sensor get Humidity","1",{"setup": "","inc": "","def": "","work": "dht_{0}.readHumidity()","loop": ""}],
-		//LM35 온도센서
-			["r","LM35 온도센서: LM35 온도 받아오기, 아날로그 %d.analog 번 핀","LM35 get temperature","0",{"setup": "","inc": "","def": "","work": "analogRead({0}) / 9.31","loop": "",}],
-		//Stepper Multi library
-			["w","스텝모터: 스텝모터 %n 번 생성, 디지털 IN1 %d.digital IN2 %d.digital IN3 %d.digital IN4 %d.digital","stepper Multi begin","1","2","3","4","5",{"setup": "","inc": "#include \"StepperMulti.h\"\n","def": "StepperMulti stepper_{0}(2080,{4},{2},{3},{1});\n","work": "","loop": ""}],
-			["w","스텝모터: 스텝모터 %n 번, 속도 %n 설정","set stepper speed and angle","1","10",{"setup": "stepper_{0}.setSpeed({1});\n","inc": "","def": "","work": "","loop": ""}],
-			["w","스텝모터: 스텝모터 %n 번, 각도 %n 설정","set Angle","1","0",{"setup": "","inc": "","def": "","work": "stepper_{0}.setStep({1});\n","loop": ""}],
-			["w","스텝모터: 스텝모터 %n 번, 움직이기","move step","1",{"setup": "","inc": "","def": "","work": "stepper_{0}.moveStep();\n","loop": ""}],
-		//TM1637 dispaly library
-			["w","FND: FND %n 번 생성, 디지털 CLK %d.digital DIO %d.digital","TM1637 FND module begin","1","7","6",{"setup": "","inc": "#include \"TM1637Display.h\"\n","def":"TM1637Display fnd_{0}({1},{2});\n","work":"","loop":""}],
-			["w","FND: FND %n 번 %d.brightness 단계 밝기 설정","set brightness","1","3",{"setup":"","inc":"","def":"","work":"fnd_{0}.setBrightness({1});\n","loop":""}],
-			["w","FND: FND %n 번 전원 %d.power","set power","1","켜기",{"setup":"","inc":"","def":"","work":"fnd_{0}.setBrightness(5, {1});\n","loop":""}],
-			["w","FND: FND %n 번 %n 출력, 옵션: 빈공간 0 채우기 %d.power, 기다리기 %n 밀리초","print number","1","2018","끄기","500",{"setup":"","inc":"","def":"","work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n","loop":""}],
-		//HC-06 BT SoftwareSerial library
-			["w","HC-06 BT: BT %n 번 생성, 디지털 TX %d.digital RX %d.digital","BT software Serial begin","1","2","3",{"setup": "BT_{0}.begin(9600);\n","inc": "","def": "SoftwareSerial BT_{0}({1},{2});\n","work": "","loop": ""}],
-			["b","HC-06 BT: BT %n 번 데이터가 왔는가?","BT available()","1",{"setup": "","inc": "","def": "","work": "BT_{0}.available()","loop": ""}],
-			["r","HC-06 BT: BT %n 번 데이터를 문자열로 받아오기","BT data read","1",{"setup": "","inc": "","def": "String ReadData(){String str; while(BT_1.available()) {char tmp = BT_1.read(); if(tmp == '\\n') break; str += tmp; delay(3);} return str;}\nchar* convertChar(String Str){String Temp = Str; char ch[100] = {0, }; Temp.toCharArray(ch, Temp.length()+1); return ch;}\n","work": "convertChar(ReadData())","loop": ""}],
-			["w","HC-06 BT: BT %n 번 %n 데이터 보네기","BT write Data","1"," ",{"setup": "","inc": "","def": "","work": "BT_{0}.write({1});","loop": ""}],
-		//GY-521 MCU6050 module Library
-			["w","GY-521 자이로: GY-521 생성","GY-521 begin",{"setup": "Wire.begin();\nWire.beginTransmission(0x68);\nWire.write(0x6B);\nWire.write(0);\nWire.endTransmission(true);\n","inc": "","def": "int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;","work": "","loop": ""}],
-			["r","GY-521 자이로: %d.readtype 받아오기","GY-521 read","가속도 X",{"setup": "","inc": "","def": "void readGY521_Ready() { Wire.beginTransmission(0x68); Wire.write(0x3B); Wire.endTransmission(false); Wire.requestFrom(0x68,14,true); }\nvoid readGY521_Running() { AcX=Wire.read()<<8|Wire.read(); AcY=Wire.read()<<8|Wire.read(); AcZ=Wire.read()<<8|Wire.read(); Tmp=Wire.read()<<8|Wire.read(); GyX=Wire.read()<<8|Wire.read(); GyY=Wire.read()<<8|Wire.read(); GyZ=Wire.read()<<8|Wire.read();}\nint16_t readGY521(int select) { readGY521_Ready(); readGY521_Running(); switch(select) { case 0: return AcX; break; case 1: return AcY; break; case 2: return AcZ; break; case 3: return GyX; break; case 4: return GyY; break; case 5: return GyZ; break; } }\n","work": "readGY521({0})","loop": ""}],
-		//기타 유용한 함수
-			["r","맵핑: 대상 %n, 대상의 값 범위 %n ~ %n 맵핑결과값의 범위 %n ~ %n","arudino map function"," ","0","1023","0","180",{"setup": "","inc": "","def": "","work": "map({0},{1},{2},{3},{4})","loop": ""}],
-			["w","문자열: 문자열 %s 을(를) 문자열 저장소 %n 번에 저장","Save String"," ","1",{"setup": "","inc": "","def": "char *STR_{1} = \" \";\n","work": "STR_{1} = {0};\n","loop": ""}],
-			["r","문자열: 문자열 저장소 %n 번 불러오기","load String","1",{"setup": "","inc": "","def": "","work": "STR_{0}","loop": ""}],
-			["r","타입변환: 문자열 %s 를 숫자로 변환","convert String to int"," ",{"setup": "","inc": "","def": "int convertStringtoInt = 0;\n","work": "convertStringtoInt = atoi({0})","loop": ""}],
-			["r","타입변환: 숫자 %n 를 문자열로 변환","convert Int to String"," ",{"setup": "","inc": "","def": "char* convertToInt(int a){char convertInttoString[100] = \" \"; sprintf(convertInttoString, \"%d\", a); return convertInttoString;}","work": "convertToInt({0})","loop": ""}]
+		[ //lcd I2C interface library
+			"w",
+			"LCD: LCD %n 번 생성, 주소: %d.addr",
+			"LCD begin",
+			"1",
+			"0x27",
+			{
+				"setup":"lcd_{0}.init();\nlcd_{0}.backlight();\n",
+				"inc":"#include \"LiquidCrystal_I2C.h\"\n",
+				"def":"LiquidCrystal_I2C lcd_{0}({1},16,2);\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD: LCD %n 번 %s 출력, %d.line 번째 줄, %d.col 번째 칸",
+			"LCD Print",
+			"1",
+			"Hello World!",
+			"0",
+			"0",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"lcd_{0}.setCursor({3},{2});\nlcd_{0}.print({1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD: LCD %n 번 지우기",
+			"LCD Clear",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"lcd_{0}.clear();\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD: LCD %n 번 백라이트 %d.power",
+			"LCD Backlight ON",
+			"1",
+			"켜기",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"if({1} == 1) lcd_{0}.backlight();\nelse lcd_{0}.noBacklight();",
+				"loop":""
+			}
+		],
+		[ //Rotary encoder library
+			"w",
+			"로터리 엔코더: 로터리 엔코더 %n 번 생성, 디지털 DT %d.digital CLK %d.digital",
+			"Encoder begin",
+			"1",
+			"2",
+			"3",
+			{
+				"setup": "",
+				"inc": "#include \"Encoder.h\"\n",
+				"def": "Encoder enc_{0}({1},{2});\n",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"로터리 엔코더: 로터리 엔코더 %n 번 읽기",
+			"Encoder read",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "enc_{0}.read()",
+				"loop": ""
+			}
+		],
+		[ //DS1302 rtc library
+			"w",
+			"DS1302 RTC: DS1302 RTC 생성, 디지털 RST %d.digital, DAT %d.digital, CLK %d.digital",
+			"DS1302 begin",
+			"2",
+			"3",
+			"4",
+			{
+				"setup": "ds1302.halt(false);\nds1302.writeProtect(false);\n",
+				"inc": "#include \"DS1302.h\"\n",
+				"def": "DS1302 ds1302({0},{1},{2});\n",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"DS1302 RTC: 날짜 설정, %n 년 %n 월 %n 일 %d.DOW 요일",
+			"set date",
+			"2018",
+			"1",
+			"1",
+			"월",
+			{
+				"setup": "ds1302.setDate({2},{1},{0});\nds1302.setDOW({3});\n",
+				"inc": "",
+				"def": "",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"DS1302 RTC: 시간 설정, %n 시 %n 분 %n 초",
+			"set time",
+			"12",
+			"0",
+			"0",
+			{
+				"setup": "ds1302.setTime({0},{1},{2});\n",
+				"inc": "",
+				"def": "",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"DS1302 RTC: 시간 받아오기",
+			"get time",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "ds1302.getTimeStr()",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"DS1302 RTC: 날짜 받아오기",
+			"get Date",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "ds1302.getDateStr()",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"DS1302 RTC: 요일 받아오기",
+			"get Day of the week",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "ds1302.getDOWStr()",
+				"loop": ""
+			}
+		],
+		[ //DHT sensor library
+			"w",
+			"DHT 온습도센서: 온습도 센서 %n 번 생성, 디지털 %d.digital 번 핀, %d.DHT 타입",
+			"DHT sensor begin",
+			"1",
+			"2",
+			"DHT11",
+			{
+				"setup": "",
+				"inc": "#include \"DHT.h\"\n",
+				"def": "DHT dht_{0}({1},{2});\n",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"DHT 온습도센서: 온습도 센서 %n 번, 온도 받아오기",
+			"DHT sensor get Temperature",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "dht_{0}.readTemperature()",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"DHT 온습도센서: 온습도 센서 %n 번, 습도 받아오기",
+			"DHT sensor get Humidity",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "dht_{0}.readHumidity()",
+				"loop": ""
+			}
+		],
+		[ //LM35 temperature sensor
+			"r",
+			"LM35 온도센서: LM35 온도 받아오기, 아날로그 %d.analog 번 핀",
+			"LM35 get temperature",
+			"0",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "analogRead({0}) / 9.31",
+				"loop": ""
+			}
+		],
+		[ //Stepper library
+			"w",
+			"스텝모터: 스텝모터 %n 번 생성, 디지털 IN1 %d.digital IN2 %d.digital IN3 %d.digital IN4 %d.digital",
+			"stepper Multi begin",
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			{
+				"setup": "",
+				"inc": "#include \"StepperMulti.h\"\n",
+				"def": "StepperMulti stepper_{0}(2080,{4},{2},{3},{1});\n",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"스텝모터: 스텝모터 %n 번, 속도 %n 설정",
+			"set stepper speed and angle",
+			"1",
+			"10",
+			{
+				"setup": "stepper_{0}.setSpeed({1});\n",
+				"inc": "",
+				"def": "",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"스텝모터: 스텝모터 %n 번, 각도 %n 설정",
+			"set Angle",
+			"1",
+			"0",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "stepper_{0}.setStep({1});\n",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"스텝모터: 스텝모터 %n 번, 움직이기",
+			"move step",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "stepper_{0}.moveStep();\n",
+				"loop": ""
+			}
+		],
+		[ //TM1637 FND module library
+			"w",
+			"FND: FND %n 번 생성, 디지털 CLK %d.digital DIO %d.digital",
+			"TM1637 FND module begin",
+			"1",
+			"7",
+			"6",
+			{
+				"setup": "",
+				"inc": "#include \"TM1637Display.h\"\n",
+				"def":"TM1637Display fnd_{0}({1},{2});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"FND: FND %n 번 %d.brightness 단계 밝기 설정",
+			"set brightness",
+			"1",
+			"3",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"fnd_{0}.setBrightness({1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"FND: FND %n 번 전원 %d.power",
+			"set power",
+			"1",
+			"켜기",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"fnd_{0}.setBrightness(5, {1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"FND: FND %n 번 %n 출력, 옵션: 빈공간 0 채우기 %d.power, 기다리기 %n 밀리초",
+			"print number",
+			"1",
+			"2018",
+			"끄기",
+			"500",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n",
+				"loop":""
+			}
+		],
+		[ //Bluetooth SoftwareSerial library
+			"w",
+			"HC-06 BT: BT %n 번 생성, 디지털 TX %d.digital RX %d.digital",
+			"BT software Serial begin",
+			"1",
+			"2",
+			"3",
+			{
+				"setup": "BT_{0}.begin(9600);\n",
+				"inc": "",
+				"def": "SoftwareSerial BT_{0}({1},{2});\n",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"b",
+			"HC-06 BT: BT %n 번 데이터가 왔는가?",
+			"BT available()",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "BT_{0}.available()",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"HC-06 BT: BT %n 번 데이터를 문자열로 받아오기",
+			"BT data read",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "String ReadData(){String str; while(BT_1.available()) {char tmp = BT_1.read(); if(tmp == '\\n') break; str += tmp; delay(3);} return str;}\nchar* convertChar(String Str){String Temp = Str; char ch[100] = {0, }; Temp.toCharArray(ch, Temp.length()+1); return ch;}\n",
+				"work": "convertChar(ReadData())",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"HC-06 BT: BT %n 번 %n 데이터 보네기",
+			"BT write Data",
+			"1",
+			" ",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "BT_{0}.write({1});",
+				"loop": ""
+			}
+		],
+		[ //GY-521 MCU6050 library
+			"w",
+			"GY-521 자이로: GY-521 생성",
+			"GY-521 begin",
+			{
+				"setup": "Wire.begin();\nWire.beginTransmission(0x68);\nWire.write(0x6B);\nWire.write(0);\nWire.endTransmission(true);\n",
+				"inc": "",
+				"def": "int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"GY-521 자이로: %d.readtype 받아오기",
+			"GY-521 read",
+			"가속도 X",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "void readGY521_Ready() { Wire.beginTransmission(0x68); Wire.write(0x3B); Wire.endTransmission(false); Wire.requestFrom(0x68,14,true); }\nvoid readGY521_Running() { AcX=Wire.read()<<8|Wire.read(); AcY=Wire.read()<<8|Wire.read(); AcZ=Wire.read()<<8|Wire.read(); Tmp=Wire.read()<<8|Wire.read(); GyX=Wire.read()<<8|Wire.read(); GyY=Wire.read()<<8|Wire.read(); GyZ=Wire.read()<<8|Wire.read();}\nint16_t readGY521(int select) { readGY521_Ready(); readGY521_Running(); switch(select) { case 0: return AcX; break; case 1: return AcY; break; case 2: return AcZ; break; case 3: return GyX; break; case 4: return GyY; break; case 5: return GyZ; break; } }\n",
+				"work": "readGY521({0})",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"맵핑: 대상 %n, 대상의 값 범위 %n ~ %n 맵핑결과값의 범위 %n ~ %n",
+			"arudino map function",
+			" ",
+			"0",
+			"1023",
+			"0",
+			"180",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "map({0},{1},{2},{3},{4})",
+				"loop": ""
+			}
+		],
+		[ //etc functions
+			"w",
+			"문자열: 문자열 %s 을(를) 문자열 저장소 %n 번에 저장",
+			"Save String",
+			" ",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "char *STR_{1} = \" \";\n",
+				"work": "STR_{1} = {0};\n",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"문자열: 문자열 저장소 %n 번 불러오기",
+			"load String",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "STR_{0}",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"타입변환: 문자열 %s 를 숫자로 변환",
+			"convert String to int",
+			" ",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "int convertStringtoInt = 0;\n",
+				"work": "convertStringtoInt = atoi({0})",
+				"loop": ""
+			}
+		],
+		[
+			"r",
+			"타입변환: 숫자 %n 를 문자열로 변환",
+			"convert Int to String",
+			" ",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "char* convertToInt(int a){char convertInttoString[100] = \" \"; sprintf(convertInttoString, \"%d\", a); return convertInttoString;}",
+				"work": "convertToInt({0})",
+				"loop": ""
+			}
+		]
 	],
 	"menus": {
 		"addr":["0x20","0x27","0x3f"],
